@@ -1,0 +1,27 @@
+# Function to solve the Fractional Knapsack Problem
+def fractional_knapsack(items, capacity):
+    # Sort items by value-to-weight ratio in descending order
+    items.sort(key=lambda x: x[1] / x[0], reverse=True)
+    
+    total_value = 0  # Total value in the knapsack
+    for weight, value in items:
+        if capacity >= weight:
+            # If the item can fit completely in the knapsack, take it all
+            total_value += value
+            capacity -= weight
+        else:
+            # If the item can't fit completely, take the fraction that fits
+            fraction = capacity / weight
+            total_value += value * fraction
+            break  # Knapsack is full
+    
+    return total_value
+
+# Example usage
+if __name__ == "__main__":
+    # List of items (weight, value)
+    items = [(10, 60), (20, 100), (30, 120)]  # (weight, value)
+    capacity = 50  # Maximum weight capacity of the knapsack
+
+    max_value = fractional_knapsack(items, capacity)
+    print("Maximum value in the knapsack:", max_value)

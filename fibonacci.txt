@@ -1,0 +1,31 @@
+# Recursive function to calculate Fibonacci with step count
+def fibonacci_recursive(n):
+    if n <= 1:
+        return n, 1  # Return Fibonacci value and 1 step for base case
+    else:
+        fib1, steps1 = fibonacci_recursive(n - 1)  # Recursive call for n-1
+        fib2, steps2 = fibonacci_recursive(n - 2)  # Recursive call for n-2
+        return fib1 + fib2, steps1 + steps2 + 1  # Return sum and total steps
+
+# Non-recursive (iterative) function to calculate Fibonacci with step count
+def fibonacci_non_recursive(n):
+    a, b = 0, 1
+    steps = 0  # Initialize step counter
+    for _ in range(n):
+        a, b = b, a + b  # Update Fibonacci values
+        steps += 1  # Count each loop iteration as a step
+    return a, steps  # Return Fibonacci value and steps
+
+# Get input from the user
+n = int(input("Enter the position of Fibonacci number: "))
+
+# Calculate Fibonacci number and step count using both methods
+fib_recursive, recursive_steps = fibonacci_recursive(n)
+fib_non_recursive, non_recursive_steps = fibonacci_non_recursive(n)
+
+# Print results
+print("Recursive Fibonacci number:", fib_recursive)
+print("Recursive steps:", recursive_steps)
+print("Non-recursive Fibonacci number:", fib_non_recursive)
+print("Non-recursive steps:", non_recursive_steps)
+

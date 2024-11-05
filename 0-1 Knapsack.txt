@@ -1,0 +1,20 @@
+def knapsack_0_1(items, capacity):
+    # Create a DP array initialized to 0
+    dp = [0] * (capacity + 1)
+
+    # Iterate through each item
+    for weight, value in items:
+        # Traverse the capacity array from right to left
+        for w in range(capacity, weight - 1, -1):
+            # Update the DP array for the current weight
+            dp[w] = max(dp[w], value + dp[w - weight])
+
+    return dp[capacity]  # The maximum value at full capacity
+
+# Example usage
+if __name__ == "__main__":
+    items = [(10, 60), (20, 100), (30, 120)]  # (weight, value)
+    capacity = 50  # Maximum weight capacity of the knapsack
+
+    max_value = knapsack_0_1(items, capacity)
+    print("Maximum value in the knapsack (0-1 Knapsack):", max_value)
